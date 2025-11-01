@@ -1,0 +1,31 @@
+═══════════════════════════════════════════════════════
+  INSTRUÇÕES PARA AS FOTOS - GRADE PRINCIPAL
+═══════════════════════════════════════════════════════
+
+Adicione 4 fotos nesta pasta com os seguintes nomes:
+
+📸 foto_grid1.jpg → "Nosso Primeiro Encontro"
+   (Aparece no canto superior esquerdo da grade)
+
+📸 foto_grid2.jpg → "Momentos Especiais"
+   (Aparece no canto superior direito da grade)
+
+📸 foto_grid3.jpg → "Viagens Juntos"
+   (Aparece no canto inferior esquerdo da grade)
+
+📸 foto_grid4.jpg → "Nossas Aventuras"
+   (Aparece no canto inferior direito da grade)
+
+FORMATOS ACEITOS:
+- .jpg
+- .jpeg
+- .png
+- .gif
+
+DICA: 
+- Escolha fotos que representem cada momento!
+- As fotos serão exibidas em formato quadrado
+- Ao passar o mouse, aparece o texto descritivo
+- Ao clicar na foto, uma mensagem especial é exibida
+
+═══════════════════════════════════════════════════════

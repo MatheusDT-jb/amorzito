@@ -1,0 +1,493 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4ea 100%);
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #e91e63;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.header .heart {
+    font-size: 3em;
+    color: #ff4081;
+    animation: heartbeat 1.5s infinite;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.photo-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background: #f0f0f0;
+    border-radius: 15px;
+    overflow: visible;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.photo-container.has-message {
+    margin-bottom: 120px;
+}
+
+.photo-container:hover {
+    transform: scale(1.05);
+}
+
+.photo-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.photo-container:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-message {
+    position: absolute;
+    bottom: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #fff9fc 0%, #ffe8f5 100%);
+    border: 2px solid #e91e63;
+    border-radius: 15px;
+    padding: 15px 20px;
+    width: 90%;
+    max-width: 300px;
+    box-shadow: 0 5px 20px rgba(233, 30, 99, 0.3);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.photo-message.show {
+    opacity: 1;
+    visibility: visible;
+    bottom: -110px;
+}
+
+.photo-message p {
+    color: #333;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.photo-message::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #e91e63;
+}
+
+.photo-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 20px;
+}
+
+.message-section {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.btn {
+    background: linear-gradient(135deg, #e91e63 0%, #ff4081 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.message-box {
+    background: linear-gradient(135deg, #fff9fc 0%, #ffe8f5 100%);
+    border-left: 5px solid #e91e63;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    display: none;
+    animation: slideIn 0.5s ease-out;
+}
+
+.message-box.show {
+    display: block;
+}
+
+.message-box p {
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.timeline {
+    margin: 40px 0;
+}
+
+.timeline-item {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border-left: 4px solid #ff4081;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item h3 {
+    color: #e91e63;
+    margin-bottom: 10px;
+}
+
+.timeline-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #ffe0f0;
+    color: #999;
+}
+
+/* Pop-up Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.modal-overlay.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #fff 0%, #ffe8f5 100%);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: popIn 0.4s ease-out;
+    text-align: center;
+    margin: auto;
+}
+
+.modal-photo {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: #999;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #e91e63;
+}
+
+.modal-content h2 {
+    color: #e91e63;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+.modal-heart {
+    font-size: 4em;
+    animation: heartPulse 1.5s infinite;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes heartPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Animações */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header .heart {
+        font-size: 2.5em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .photo-container.has-message {
+        margin-bottom: 110px;
+    }
+
+    .photo-message {
+        width: 95%;
+        font-size: 0.9em;
+        padding: 12px 15px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1em;
+        margin: 8px;
+    }
+
+    .message-box {
+        padding: 20px;
+    }
+
+    .message-box p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .photo-container.has-message {
+        margin-bottom: 100px;
+    }
+
+    .photo-message {
+        width: 95%;
+        font-size: 0.85em;
+        padding: 10px 12px;
+        bottom: -95px;
+        position: absolute;
+    }
+
+    .photo-message.show {
+        bottom: -90px;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .modal-overlay {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+        max-height: 85vh;
+        margin: 20px auto;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+
+    .modal-content p {
+        font-size: 1em;
+    }
+
+    .modal-heart {
+        font-size: 3em;
+    }
+}
